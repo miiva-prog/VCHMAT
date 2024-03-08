@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#define EPS 0.0001
 
 void print(int n,double matrix[n][n + 1]);
 
@@ -39,7 +40,6 @@ void just_iteration(int size,double matrix[size][size + 1])
     }
 
     double vector[size];
-    double eps = 0.0001;
     int flag = 0;
 
     for(int n = 0;n < size;n++)
@@ -55,9 +55,9 @@ void just_iteration(int size,double matrix[size][size + 1])
         }
 
         for(int n = 0;n < size;n++)
-            if(vector[n] - matrix[n][size] < eps)
+            if(vector[n] - matrix[n][size] < EPS)
                 flag++;
-    }    
+    }
 
     for(int n = 0;n < size;n++)
         printf("%f\n",vector[n]);
