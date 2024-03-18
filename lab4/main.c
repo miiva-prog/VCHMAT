@@ -13,8 +13,12 @@ int main()
 {
     FILE *data = fopen("data.txt","w");
     FILE *point = fopen("point.txt","w");
-    int size = 4;
+    int size;
     double interpol;
+
+    printf("size ->");
+    scanf("%d",&size);
+
     Point p[size];
 
     for(int n = 0;n < size;n++){

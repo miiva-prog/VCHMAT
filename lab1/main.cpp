@@ -2,6 +2,48 @@
 
 using namespace std;
 
+void print(double **matrix,int n);
+
+void modification(double **matrix,int n);
+
+void Gauss(double **matrix,int n);
+
+int main()
+{
+    int n;
+
+    cout << "SIZE ->";
+    cin >> n;
+    cout << n << "x" << n + 1 << ":" << endl;
+
+    double** matrix = new double*[n];
+
+    for(int i = 0;i < n;i++)
+        matrix[i] = new double[n + 1];
+    
+    for(int i = 0;i < n;i++)
+        for(int j = 0;j < n + 1;j++) 
+            cin >> matrix[i][j];
+
+    modification(matrix,n);
+
+    cout << "Modification" << endl;
+
+    print(matrix,n);
+
+    cout << endl;
+
+    Gauss(matrix,n);
+    print(matrix,n);
+
+    for(int i = 0;i < n;i++)
+        delete[] matrix[i];
+
+    delete[] matrix;
+
+    return 0;
+}
+
 void print(double **matrix,int n)
 {
     for(int i = 0;i < n;i++){
@@ -55,40 +97,4 @@ void Gauss(double **matrix,int n)
 
     for(int i = 0;i < n;i++)
         cout << "x" << i + 1 << " = " << solution[i] << endl;
-}
-
-int main()
-{
-    int n;
-
-    cout << "SIZE ->";
-    cin >> n;
-    cout << n << "x" << n + 1 << ":" << endl;
-
-    double** matrix = new double*[n];
-
-    for(int i = 0;i < n;i++)
-        matrix[i] = new double[n + 1];
-    
-    for(int i = 0;i < n;i++)
-        for(int j = 0;j < n + 1;j++) 
-            cin >> matrix[i][j];
-
-    modification(matrix,n);
-
-    cout << "Modification" << endl;
-
-    print(matrix,n);
-
-    cout << endl;
-
-    Gauss(matrix,n);
-    print(matrix,n);
-
-    for(int i = 0;i < n;i++)
-        delete[] matrix[i];
-
-    delete[] matrix;
-
-    return 0;
 }
