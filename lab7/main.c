@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <math.h>
+#define F(x) log(1 + x) / x
 
-double func(double x)
-{
-    return log(1 + x) / x;
-}
-
-int main(int argc, char **argv)
+int main()
 {
     double eps = 1E-5;
     double a = 0.1;
@@ -21,14 +17,14 @@ int main(int argc, char **argv)
         sq[k] = 0;
 
         for(int i = 0;i < n;i++)
-            s += (func(a + h * (i + 1)) + func(a + h * (i + 0))) / 2;
-            
+            s += (F(a + h * (i + 1)) + F(a + h * (i + 0))) / 2;
+
         sq[k] += s * h; 
         
         if(n > n0)
             delta = fabs(sq[k] - sq[k ^ 1]) / 3.0;
 
-        printf("n = %d i = %d sq = %.12f delta = %.12f\n",n,k,sq[k],delta);
+        printf("n = %d k = %d sq = %.12f delta = %.12f\n",n,k,sq[k],delta);
     }
 
     return 0;
