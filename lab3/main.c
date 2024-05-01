@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #define EPS 0.0001
-
-double equation(double x);
+#define F(x) (x * x - 10)
 
 double half_div(double a,double b);
 
@@ -23,17 +22,12 @@ int main()
     return 0;
 }
 
-double equation(double x)
-{
-    return x * x - 10;
-}
-
 double half_div(double a,double b)
 {
     double c = (a + b) / 2.0;
 
-    while(abs(equation(c)) > EPS){
-        if(equation(c) < 0)
+    while(abs(F(c)) > EPS){
+        if(F(c) < 0)
             a = c;
         else
             b = c;
@@ -46,21 +40,21 @@ double half_div(double a,double b)
 
 double chord(double a,double b)
 {
-    double c = (a * equation(b) - b * equation(a)) / (equation(b) - equation(a));
+    double c = (a * F(b) - b * F(a)) / (F(b) - F(a));
 
-    while(abs(equation(c)) > EPS){
-        if(equation(a) * equation(c) < 0 && equation(b) * equation(c) < 0)
+    while(abs(F(c)) > EPS){
+        if(F(a) * F(c) < 0 && F(b) * F(c) < 0)
             return -1.0;
         
-        if(equation(a) * equation(c) > 0 && equation(b) * equation(c) > 0)
+        if(F(a) * F(c) > 0 && F(b) * F(c) > 0)
             return -1.0;
 
-        if(equation(a) * equation(c) < 0)
+        if(F(a) * F(c) < 0)
             b = c;
         else
             a = c;
         
-        c = (a * equation(b) - b * equation(a)) / (equation(b) - equation(a));
+        c = (a * F(b) - b * F(a)) / (F(b) - F(a));
     }
 
     return c;
@@ -78,18 +72,18 @@ double derivative_2(double x)
 
 double newton(double a,double b)
 {
-    if(equation(a) * derivative_2(a) > 0 && equation(b) * derivative_2(b) > 0)
+    if(F(a) * derivative_2(a) > 0 && F(b) * derivative_2(b) > 0)
         return -1.0;
 
     double c;
 
-    if(equation(a) * derivative_2(a) > 0)
+    if(F(a) * derivative_2(a) > 0)
         c = a;
     else
         c = b;
     
-    while(abs(equation(c)) > EPS)
-        c = c - (equation(c) / derivative(c)); 
+    while(abs(F(c)) > EPS)
+        c = c - (F(c) / derivative(c)); 
     
     return c;
 }
