@@ -13,7 +13,7 @@ int main()
     scanf("%lf",&h);
     printf("y0 ->");
     scanf("%lf",&y0);
-    printf("yn - %f\n",euler(x0,xn,y0,h));
+    printf("yn - %.1f\n",euler(x0,xn,y0,h));
 
     return 0;
 }
